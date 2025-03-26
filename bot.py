@@ -1,23 +1,26 @@
+import os
 import asyncio
 from aiogram import Bot, Dispatcher, types, F
-from aiogram.types import Message, CallbackQuery
 from aiogram.enums import ParseMode
-from config import BOT_TOKEN
+from aiogram.client.default import DefaultBotProperties
+from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.types import Message, CallbackQuery, FSInputFile, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.client.default import DefaultBotProperties
-from aiogram.types import FSInputFile
+
 from keyboards import main_menu, back_button, order_services_kb
-from aiogram.fsm.storage.memory import MemoryStorage
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-dp = Dispatcher(storage=MemoryStorage())
+# ⬇️ Берем токен из переменной окружения
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
+# ⬇️ Сначала создаём бот
 bot = Bot(
     token=BOT_TOKEN,
     default=DefaultBotProperties(parse_mode=ParseMode.HTML)
 )
+
+# ⬇️ Затем диспетчер
+dp = Dispatcher(storage=MemoryStorage())
 dp = Dispatcher()
 
 ADMIN_ID = 1102002634  # ← Замени на свой Telegram ID
